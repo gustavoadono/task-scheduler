@@ -1,5 +1,6 @@
 package dev.adonogtx.ui;
 
+import dev.adonogtx.model.TaskDomainException;
 import dev.adonogtx.service.SchedulerService;
 
 import java.util.Scanner;
@@ -41,6 +42,7 @@ public class ConsoleApplication {
     }
 
     void showMenuOptions(){
+        System.out.println();
         System.out.println("1. Add task");
         System.out.println("2. List tasks");
         System.out.println("3. Search task");
@@ -48,6 +50,7 @@ public class ConsoleApplication {
         System.out.println("5. Complete task");
         System.out.println("6. Execute next task");
         System.out.println("0. Exit");
+        System.out.println("Choose an option: ");
     }
 
     void addTask() {
@@ -60,11 +63,19 @@ public class ConsoleApplication {
         System.out.println("Scheduled date(yyyy-MM-dd): ");
         String date = scanner.nextLine();
 
-        if(!service.addTask(title, description, priority, date)){
-            System.out.println("failed to add task");
-        }else {
-            System.out.println("task added with success");
+
+        try {
+
+            service.addTask(title, description, priority, date);
+            System.out.println("Task added successfully!");
+            service.printLastTaskId();
+
+        } catch (TaskDomainException e) {
+            System.err.println("Error Code: " + e.getErrorCode().getCode());
+            System.err.println("Message: " + e.getMessage());
         }
+
+
     }
 
     void listTasks() {
