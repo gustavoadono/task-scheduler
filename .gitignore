@@ -1,7 +1,12 @@
 ### IntelliJ IDEA ###
+.idea/
+*.iml
+
+### Build ###
 out/
 !**/src/main/**/out/
 !**/src/test/**/out/
+
 .kotlin
 
 ### Eclipse ###
