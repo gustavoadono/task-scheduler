@@ -251,13 +251,13 @@ The scheduled date must be represented using an appropriate Java date/time type 
 The required date format is:
 
 ```text
-yyyy/MM/dd
+yyyy-MM-dd
 ```
 
 For example:
 
 ```text
-2026/09/10
+2026-09-10
 ```
 
 The application must:
