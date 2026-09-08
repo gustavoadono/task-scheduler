@@ -58,7 +58,9 @@ public class Task implements Comparable<Task> {
         return status;
     }
 
-
+    public void setStatus(TASK_STATUS status) {
+        this.status = status;
+    }
 
     @Override
     public boolean equals(Object o) {
