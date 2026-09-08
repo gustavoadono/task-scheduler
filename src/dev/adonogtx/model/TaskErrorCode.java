@@ -6,7 +6,8 @@ public enum TaskErrorCode {
     INVALID_DATE_FORMAT("TASK_003", "Invalid date format or value: '%s'."),
     INVALID_PRIORITY("TASK_004", "Invalid priority value: '%s'."),
     ALREADY_COMPLETED("TASK_005", "Task already completed."),
-    TASK_NOT_FOUND("TASK_006", "Task with ID %s was not found.");
+    NO_PENDING_TASKS("TASK_006", "No pending tasks available for execution."),
+    TASK_NOT_FOUND("TASK_007", "Task with ID %s was not found.");
 
     private final String code;
     private final String defaultMessage;

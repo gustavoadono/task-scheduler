@@ -153,7 +153,15 @@ public class ConsoleApplication {
     }
 
     void executeNextTask() {
+        try {
+            Task nextTask = service.executeNextTask();
 
+            System.out.println("Next task executed:");
+            printTask(nextTask);
+        } catch (TaskDomainException e) {
+            System.err.println("Error Code: " + e.getErrorCode().getCode());
+            System.err.println("Message: " + e.getMessage());
+        }
     }
 
     public static void printTask(Task task) {
