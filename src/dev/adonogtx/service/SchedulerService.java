@@ -122,11 +122,28 @@ public class SchedulerService {
         return removed;
     }
 
-    public boolean completeTask() {
-        return false;
+    public void completeTask(String taskId) {
+
+
+        for (Task task : taskList) {
+            if (task.getId().toString().equals(taskId)){
+                if(task.getStatus() == Task.TASK_STATUS.PENDING)
+                {
+                    task.setStatus(Task.TASK_STATUS.COMPLETE);
+                }
+                else{
+                    throw new TaskDomainException(TaskErrorCode.ALREADY_COMPLETED);
+                }
+                return;
+            }
+        }
+
+        throw new TaskDomainException(TaskErrorCode.TASK_NOT_FOUND, taskId);
+
     }
 
     public boolean executeNextTask() {
+
         return false;
     }
 
@@ -147,5 +164,7 @@ public class SchedulerService {
     public void printLastTaskId() {
         System.out.println("ID: " + taskList.getLast().getId());
     }
+
+
 
 }

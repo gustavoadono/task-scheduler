@@ -140,7 +140,16 @@ public class ConsoleApplication {
     }
 
     void completeTask() {
+        System.out.println("Task ID: ");
+        String complete = scanner.nextLine();
 
+        try{
+            service.completeTask(complete);
+            System.out.println("Task "+complete+" completed");
+        } catch (TaskDomainException e) {
+            System.err.println("Error Code: " + e.getErrorCode().getCode());
+            System.err.println("Message: " + e.getMessage());
+        }
     }
 
     void executeNextTask() {
