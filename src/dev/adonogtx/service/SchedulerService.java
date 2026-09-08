@@ -65,23 +65,18 @@ public class SchedulerService {
     }
 
 
-    public void listTasksByPriority() {
-
-        taskList.sort(new FilterByPriority());
-        for (Task task : taskList) {
-            System.out.println(task);
-        }
-
+    public List<Task> listTasksByPriority() {
+        List<Task> tasks = new ArrayList<>(taskList);
+        tasks.sort(new FilterByPriority());
+        return tasks;
     }
 
-    public void listTasksByDate() {
-
-        taskList.sort(new FilterByDate());
-        for (Task task : taskList) {
-            System.out.println(task);
-        }
-
+    public List<Task> listTasksByDate() {
+        List<Task> tasks = new ArrayList<>(taskList);
+        tasks.sort(new FilterByDate());
+        return tasks;
     }
+
 
     public boolean searchTask() {
         return false;

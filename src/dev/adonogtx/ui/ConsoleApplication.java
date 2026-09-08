@@ -1,8 +1,11 @@
 package dev.adonogtx.ui;
 
+import dev.adonogtx.model.Task;
 import dev.adonogtx.model.TaskDomainException;
 import dev.adonogtx.service.SchedulerService;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class ConsoleApplication {
@@ -41,7 +44,7 @@ public class ConsoleApplication {
 
     }
 
-    void showMenuOptions(){
+    void showMenuOptions() {
         System.out.println();
         System.out.println("1. Add task");
         System.out.println("2. List tasks");
@@ -65,7 +68,6 @@ public class ConsoleApplication {
 
 
         try {
-
             service.addTask(title, description, priority, date);
             System.out.println("Task added successfully!");
             service.printLastTaskId();
@@ -83,10 +85,27 @@ public class ConsoleApplication {
         System.out.println("2. List by date");
         options = scanner.nextLine();
         int taskMenu = Integer.parseInt(options);
-        switch (taskMenu){
-            case 1 -> service.listTasksByPriority();
-            case 2 -> service.listTasksByDate();
-            default -> System.out.println("invalid option");
+
+        List<Task> taskListShow;
+
+        if (taskMenu == 1) {
+            taskListShow = service.listTasksByPriority();
+
+        } else if (taskMenu == 2) {
+            taskListShow = service.listTasksByDate();
+        } else {
+            System.out.println("Invalid option");
+            return;
+        }
+
+        if (taskListShow.isEmpty()) {
+            System.out.println("No tasks registered.");
+            return;
+        }
+
+
+        for (Task task : taskListShow) {
+            printTask(task);
         }
 
     }
@@ -105,6 +124,15 @@ public class ConsoleApplication {
 
     void executeNextTask() {
 
+    }
+
+    public static void printTask(Task task) {
+        System.out.println("ID: " + task.getId());
+        System.out.println("Title: " + task.getTitle());
+        System.out.println("Description: " + task.getDescription());
+        System.out.println("Priority: " + task.getPriority().name());
+        System.out.println("Scheduled date: " + task.getDate());
+        System.out.println("Status: " + task.getStatus().name());
     }
 
 }

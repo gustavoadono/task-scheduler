@@ -58,6 +58,8 @@ public class Task implements Comparable<Task> {
         return status;
     }
 
+
+
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
