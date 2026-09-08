@@ -78,8 +78,29 @@ public class SchedulerService {
     }
 
 
-    public boolean searchTask() {
-        return false;
+    public List<Task> searchTask(String search) {
+
+        List<Task> matchingTasks = new ArrayList<>();
+
+        for (Task task : taskList) {
+
+            boolean idMatches = task.getId().toString().equals(search);
+
+            boolean titleMatches = task.getTitle()
+                    .toLowerCase()
+                    .contains(search.toLowerCase());
+
+            boolean descriptionMatches = task.getDescription()
+                    .toLowerCase()
+                    .contains(search.toLowerCase());
+
+            if( idMatches || titleMatches || descriptionMatches){
+                matchingTasks.add(task);
+            }
+
+        }
+
+        return matchingTasks;
     }
 
     public boolean removeTask() {

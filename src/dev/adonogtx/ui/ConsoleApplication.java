@@ -112,6 +112,19 @@ public class ConsoleApplication {
 
     void searchTask() {
 
+        System.out.println("Search: ");
+        String search = scanner.nextLine();
+
+        List<Task> tasks = service.searchTask(search);
+
+        if (tasks.isEmpty()) {
+            System.out.println("No tasks found.");
+            return;
+        }
+
+        for (Task task : tasks) {
+            printTask(task);
+        }
     }
 
     void removeTask() {
