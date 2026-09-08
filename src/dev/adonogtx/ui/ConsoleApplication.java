@@ -128,6 +128,14 @@ public class ConsoleApplication {
     }
 
     void removeTask() {
+        System.out.println("Task ID:: ");
+        String delete = scanner.nextLine();
+        if(service.removeTask(delete)){
+            System.out.println("Task "+delete+" deleted successfully");
+        }
+        else{
+            System.out.println("Task "+delete+" not found");
+        }
 
     }
 

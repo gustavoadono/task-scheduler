@@ -10,14 +10,14 @@ import java.time.format.DateTimeParseException;
 import java.util.*;
 
 
-class FilterByPriority implements Comparator<Task>{
+class FilterByPriority implements Comparator<Task> {
     @Override
     public int compare(Task o1, Task o2) {
         return o2.getPriority().compareTo(o1.getPriority());
     }
 }
 
-class FilterByDate implements Comparator<Task>{
+class FilterByDate implements Comparator<Task> {
     @Override
     public int compare(Task o1, Task o2) {
         return o1.getDate().compareTo(o2.getDate());
@@ -94,7 +94,7 @@ public class SchedulerService {
                     .toLowerCase()
                     .contains(search.toLowerCase());
 
-            if( idMatches || titleMatches || descriptionMatches){
+            if (idMatches || titleMatches || descriptionMatches) {
                 matchingTasks.add(task);
             }
 
@@ -103,8 +103,23 @@ public class SchedulerService {
         return matchingTasks;
     }
 
-    public boolean removeTask() {
-        return false;
+    public boolean removeTask(String id) {
+
+        boolean removed = false;
+
+
+        Iterator<Task> taskIterator = taskList.iterator();
+
+        while (taskIterator.hasNext()) {
+            if (taskIterator.next().getId().toString().equals(id)) {
+                taskIterator.remove();
+                removed = true;
+                break;
+            }
+        }
+
+
+        return removed;
     }
 
     public boolean completeTask() {
@@ -129,8 +144,8 @@ public class SchedulerService {
     }
 
 
-    public void printLastTaskId(){
-        System.out.println("ID: "+taskList.getLast().getId());
+    public void printLastTaskId() {
+        System.out.println("ID: " + taskList.getLast().getId());
     }
 
 }
